@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In To My Heart</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Quicksand", sans-serif;
+        color: white;
+        overflow-x: hidden;
+        cursor: none;
+        background: linear-gradient(-45deg, #2b0000, #520000, #780000, #1a0000);
+        background-size: 400% 400%;
+        animation: bgMove 12s ease infinite;
+      }
+
+      @keyframes bgMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(rgba(255, 0, 60, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 0, 60, 0.08) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* CURSOR */
+
+      .cursor {
+        position: fixed;
+        width: 18px;
+        height: 18px;
+        background: #ff2e63;
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 15px #ff2e63;
+        z-index: 9999;
+      }
+
+      /* LOGIN */
+
+      #loginScreen {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #180000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+      }
+
+      .login-box {
+        background: rgba(255,255,255,0.95);
+        color: black;
+        padding: 50px;
+        border: 4px solid black;
+        box-shadow: 10px 10px #ff2e63;
+        text-align: center;
+        width: 420px;
+      }
+
+      .login-box h2 {
+        font-family: "Press Start 2P";
+        font-size: 13px;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        color: #ff2e63;
+      }
+
+      .login-box input {
+        display: block;
+        margin: 15px auto;
+        padding: 14px;
+        width: 100%;
+        border: 2px solid black;
+        font-size: 15px;
+      }
+
+      .login-box button {
+        padding: 14px 25px;
+        background: #ff2e63;
+        color: white;
+        border: none;
+        font-family: "Press Start 2P";
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      #loginError {
+        color: red;
+        margin-top: 15px;
+      }
+
+      /* LOADING */
+
+      #loadingScreen {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: white;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        font-family: "Press Start 2P";
+        text-align: center;
+      }
+
+      #loadingScreen h1 {
+        line-height: 2;
+        color: #ff2e63;
+        margin-bottom: 40px;
+        font-size: 15px;
+      }
+
+      .loader-bar {
+        width: 320px;
+        height: 24px;
+        border: 3px solid #ff2e63;
+      }
+
+      .loader-fill {
+        height: 100%;
+        width: 0%;
+        background: #ff2e63;
+      }
+
+      /* XP */
+
+      #xpContainer {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        max-width: 800px;
+        height: 25px;
+        background: black;
+        border: 3px solid #ff2e63;
+        z-index: 50;
+        box-shadow: 0 0 20px #ff2e63;
+      }
+
+      #xpBar {
+        height: 100%;
+        width: 0%;
+        background: #ff2e63;
+        transition: 0.4s;
+      }
+
+      #levelText {
+        position: fixed;
+        bottom: 55px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Press Start 2P";
+        font-size: 12px;
+        color: #ff2e63;
+        text-shadow: 0 0 10px #ff2e63;
+        z-index: 60;
+      }
+
+      /* XP FLOAT */
+
+      .xp-float {
+        position: fixed;
+        color: #00ff88;
+        font-family: "Press Start 2P";
+        font-size: 10px;
+        animation: xpRise 1.2s ease-out forwards;
+        z-index: 200;
+      }
+
+      @keyframes xpRise {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-40px);
+        }
+      }
+
+      /* ACHIEVEMENT */
+
+      #achievementBox {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        background: black;
+        border: 3px solid #ff2e63;
+        padding: 20px;
+        font-family: "Press Start 2P";
+        font-size: 10px;
+        display: none;
+        z-index: 300;
+        box-shadow: 0 0 20px #ff2e63;
+        animation: popIn 0.4s ease;
+      }
+
+      @keyframes popIn {
+        from {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* FLASH */
+
+      .levelFlash {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 46, 99, 0.2);
+        z-index: 150;
+        animation: flash 0.5s ease;
+      }
+
+      @keyframes flash {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      /* MAIN CONTENT */
+
+      #mainContent {
+        display: none;
+      }
+
+      .section {
+        min-height: 100vh;
+        padding: 180px 40px;
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      .window {
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(10px);
+        border: 3px solid rgba(255,255,255,0.15);
+        box-shadow: 0 0 40px rgba(255,46,99,0.3);
+        padding: 60px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.4s;
+      }
+
+      .window:hover {
+        transform: scale(1.02);
+      }
+
+      .year-title {
+        font-family: "Press Start 2P";
+        font-size: 24px;
+        color: #ff2e63;
+        margin-bottom: 40px;
+      }
+
+      .year-content {
+        font-size: 24px;
+        line-height: 1.8;
+      }
+
+      /* POPUP */
+
+      .yearOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.88);
+        backdrop-filter: blur(20px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.4s;
+        z-index: 999;
+      }
+
+      .yearOverlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .yearPopup {
+        width: 85%;
+        max-width: 1200px;
+        min-height: 80vh;
+        background: rgba(255,255,255,0.08);
+        border: 3px solid #ff2e63;
+        border-radius: 30px;
+        padding: 60px;
+        position: relative;
+        overflow-y: auto;
+        box-shadow: 0 0 50px rgba(255,46,99,0.5);
+        animation: popupIn 0.4s ease;
+      }
+
+      @keyframes popupIn {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .closePopup {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        font-size: 35px;
+        cursor: pointer;
+        color: #ff2e63;
+      }
+
+      .popupYear {
+        font-family: "Press Start 2P";
+        color: #ff2e63;
+        font-size: 28px;
+        margin-bottom: 40px;
+      }
+
+      .popupContent {
+        font-size: 22px;
+        line-height: 2;
+        white-space: pre-line;
+      }
+
+      /* PRESS X */
+
+      #unlock2026 {
+        text-align: center;
+        font-family: "Press Start 2P";
+        color: #ff2e63;
+        font-size: 14px;
+        padding-bottom: 180px;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
+
+      /* HEARTS */
+
+      .heart {
+        position: fixed;
+        bottom: -20px;
+        color: #ff2e63;
+        font-size: 20px;
+        animation: floatUp 8s linear infinite;
+        opacity: 0.7;
+      }
+
+      @keyframes floatUp {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-120vh);
+        }
+      }
+
+      /* SPARKS */
+
+      .spark {
+        position: fixed;
+        color: #ff6b81;
+        font-size: 12px;
+        animation: drift 10s linear infinite;
+        opacity: 0.5;
+      }
+
+      @keyframes drift {
+        from {
+          transform: translateX(-10vw);
+        }
+        to {
+          transform: translateX(110vw);
+        }
+      }
+
+      /* FINAL */
+
+      #final2026 {
+        display: none;
+        min-height: 100vh;
+        padding: 180px 40px;
+        text-align: center;
+      }
+
+      .video-container {
+        width: 90%;
+        max-width: 1000px;
+        aspect-ratio: 16/9;
+        margin: 40px auto;
+        border: 4px solid #ff2e63;
+        box-shadow: 0 0 35px rgba(255,46,99,0.5);
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* CLOUD TRANSITION */
+
+      #cloudTransition {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 2000;
+        display: none;
+      }
+
+      .cloud {
+        position: absolute;
+        width: 600px;
+        height: 250px;
+        background: rgba(255,255,255,0.95);
+        border-radius: 50%;
+        filter: blur(35px);
+        animation: cloudRise 3.5s ease forwards;
+      }
+
+      @keyframes cloudRise {
+        0% {
+          transform: translateY(120vh);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-180vh);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="cloudTransition"></div>
+
+    <div class="cursor"></div>
+
+    <!-- POPUP -->
+
+    <div class="yearOverlay" id="yearOverlay">
+      <div class="yearPopup">
+        <div class="closePopup" id="closePopup">✕</div>
+
+        <div class="popupYear" id="popupYear"></div>
+
+        <div class="popupContent" id="popupContent"></div>
+      </div>
+    </div>
+
+    <!-- LOGIN -->
+
+    <div id="loginScreen">
+      <div class="login-box">
+        <h2>LOG IN TO MY HEART</h2>
+
+        <input type="text" id="username" placeholder="Your Name" />
+
+        <input type="password" id="password" placeholder="Password" />
+
+        <button id="loginBtn">ENTER</button>
+
+        <p id="loginError"></p>
+      </div>
+    </div>
+
+    <!-- LOADING -->
+
+    <div id="loadingScreen">
+      <h1>I HAVE BEEN WAITING<br>FOR YOU MERIJAN.</h1>
+
+      <div class="loader-bar">
+        <div class="loader-fill" id="loaderFill"></div>
+      </div>
+    </div>
+
+    <!-- AUDIO -->
+
+    <audio id="bgMusic" loop>
+      <source src="sounds/Dekha Hi Nahi.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="typingSound" src="sounds/typing sound.mp3"></audio>
+
+    <audio id="clickSound" src="sounds/click sound.mp3"></audio>
+
+    <audio id="levelUpSound" src="sounds/level up sound.mp3"></audio>
+
+    <audio id="finalTransitionMusic">
+      <source src="sounds/final stage transition music.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- HUD -->
+
+    <div id="levelText">LEVEL 1</div>
+
+    <div id="xpContainer">
+      <div id="xpBar"></div>
+    </div>
+
+    <!-- MAIN -->
+
+    <div id="mainContent">
+
+      <section class="section year" data-xp="100">
+        <div
+          class="window year-card"
+          data-year="2022"
+          data-content="YOUR 2022 MEMORIES HERE
+
+Add letters.
+Add screenshots.
+Add images.
+Add your story."
+        >
+          <div class="year-title">2022</div>
+
+          <div class="year-content">
+            The beginning of us.
+          </div>
+        </div>
+      </section>
+
+      <section class="section year" data-xp="100">
+        <div
+          class="window year-card"
+          data-year="2023"
+          data-content="YOUR 2023 MEMORIES HERE
+
+Long messages.
+Cute moments.
+Conversations.
+Everything special."
+        >
+          <div class="year-title">2023</div>
+
+          <div class="year-content">
+            The growing chapter.
+          </div>
+        </div>
+      </section>
+
+      <section class="section year" data-xp="100">
+        <div
+          class="window year-card"
+          data-year="2024"
+          data-content="YOUR 2024 MEMORIES HERE
+
+Your biggest memories.
+Your favorite screenshots.
+Your letters."
+        >
+          <div class="year-title">2024</div>
+
+          <div class="year-content">
+            The unforgettable year.
+          </div>
+        </div>
+      </section>
+
+      <section class="section year" data-xp="100">
+        <div
+          class="window year-card"
+          data-year="2025"
+          data-content="YOUR BIGGEST YEAR.
+
+This section is intentionally huge.
+
+Add:
+• Long letters
+• Many images
+• Memories
+• Emotional paragraphs
+• Video memories"
+        >
+          <div class="year-title">2025</div>
+
+          <div class="year-content">
+            The final chapter before forever.
+          </div>
+        </div>
+      </section>
+
+      <div id="unlock2026">
+        PRESS X TO ENTER THE FINAL STAGE — 2026
+      </div>
+
+    </div>
+
+    <!-- FINAL -->
+
+    <section id="final2026">
+
+      <h1 style="font-family:'Press Start 2P'; color:#ff2e63; margin-bottom:30px;">
+        LEVEL 6 — 2026
+      </h1>
+
+      <h2 style="margin-bottom:50px;">
+        This is where we begin again.
+      </h2>
+
+      <div class="video-container">
+        <video controls>
+          <source src="videos/final.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+    </section>
+
+    <div id="achievementBox">Achievement Unlocked!</div>
+
+    <script>
+
+      const loginBtn = document.getElementById("loginBtn");
+      const password = document.getElementById("password");
+      const username = document.getElementById("username");
+      const loginError = document.getElementById("loginError");
+
+      const loginScreen = document.getElementById("loginScreen");
+      const loadingScreen = document.getElementById("loadingScreen");
+      const loaderFill = document.getElementById("loaderFill");
+
+      const mainContent = document.getElementById("mainContent");
+      const final2026 = document.getElementById("final2026");
+
+      const levelText = document.getElementById("levelText");
+      const xpBar = document.getElementById("xpBar");
+
+      const bgMusic = document.getElementById("bgMusic");
+      const typingSound = document.getElementById("typingSound");
+      const clickSound = document.getElementById("clickSound");
+
+      /* CURSOR */
+
+      document.addEventListener("mousemove", (e) => {
+        document.querySelector(".cursor").style.left = e.clientX + "px";
+        document.querySelector(".cursor").style.top = e.clientY + "px";
+      });
+
+      /* SOUNDS */
+
+      document.querySelectorAll("input").forEach((i) => {
+        i.addEventListener("keydown", () => {
+          typingSound.currentTime = 0;
+          typingSound.play();
+        });
+      });
+
+      document.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+
+      /* LOGIN */
+
+      function attemptLogin() {
+
+        if (password.value === "elonom123") {
+
+          loginScreen.style.display = "none";
+
+          startLoading();
+
+        } else {
+
+          loginError.innerText = "Wrong password.";
+
+        }
+      }
+
+      loginBtn.onclick = attemptLogin;
+
+      password.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") attemptLogin();
+      });
+
+      username.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") attemptLogin();
+      });
+
+      /* LOADING */
+
+      function startLoading() {
+
+        loadingScreen.style.display = "flex";
+
+        bgMusic.volume = 0;
+
+        bgMusic.play();
+
+        let w = 0;
+
+        let load = setInterval(() => {
+
+          w += 5;
+
+          loaderFill.style.width = w + "%";
+
+          if (w >= 100) {
+
+            clearInterval(load);
+
+            loadingScreen.style.display = "none";
+
+            mainContent.style.display = "block";
+
+            spawnHearts();
+
+            spawnSparks();
+
+            fadeMusicIn();
+
+          }
+
+        }, 120);
+      }
+
+      /* MUSIC */
+
+      function fadeMusicIn() {
+
+        let f = setInterval(() => {
+
+          if (bgMusic.volume < 0.5) {
+            bgMusic.volume += 0.02;
+          } else {
+            clearInterval(f);
+          }
+
+        }, 200);
+      }
+
+      function fadeMusicOut() {
+
+        let f = setInterval(() => {
+
+          if (bgMusic.volume > 0.02) {
+
+            bgMusic.volume -= 0.02;
+
+          } else {
+
+            bgMusic.pause();
+
+            clearInterval(f);
+          }
+
+        }, 200);
+      }
+
+      /* HEARTS */
+
+      function spawnHearts() {
+
+        setInterval(() => {
+
+          let h = document.createElement("div");
+
+          h.className = "heart";
+
+          h.innerText = "❤";
+
+          h.style.left = Math.random() * 100 + "vw";
+
+          document.body.appendChild(h);
+
+          setTimeout(() => h.remove(), 8000);
+
+        }, 600);
+      }
+
+      /* SPARKS */
+
+      function spawnSparks() {
+
+        setInterval(() => {
+
+          let s = document.createElement("div");
+
+          s.className = "spark";
+
+          s.innerText = "✦";
+
+          s.style.top = Math.random() * 100 + "vh";
+
+          document.body.appendChild(s);
+
+          setTimeout(() => s.remove(), 10000);
+
+        }, 1200);
+      }
+
+      /* XP SYSTEM */
+
+      let xp = 0,
+          level = 1,
+          maxXP = 100;
+
+      function gainXP(amount) {
+
+        xp += amount;
+
+        let float = document.createElement("div");
+
+        float.className = "xp-float";
+
+        float.innerText = "+" + amount + " XP";
+
+        float.style.left = "50%";
+
+        float.style.top = "60%";
+
+        document.body.appendChild(float);
+
+        setTimeout(() => float.remove(), 1200);
+
+        if (xp >= maxXP) {
+
+          xp -= maxXP;
+
+          level++;
+
+          levelText.innerText = "LEVEL " + level;
+
+          showAchievement("Level " + level + " Unlocked 💖");
+
+          levelUpEffect();
+        }
+
+        xpBar.style.width = (xp / maxXP) * 100 + "%";
+      }
+
+      /* OBSERVER */
+
+      const observer = new IntersectionObserver(
+
+        (entries) => {
+
+          entries.forEach((e) => {
+
+            if (e.isIntersecting && !e.target.classList.contains("counted")) {
+
+              e.target.classList.add("counted");
+
+              gainXP(parseInt(e.target.dataset.xp));
+            }
+          });
+        },
+
+        { threshold: 0.6 }
+      );
+
+      document.querySelectorAll(".year").forEach((y) => observer.observe(y));
+
+      /* ACHIEVEMENT */
+
+      function showAchievement(text) {
+
+        let box = document.getElementById("achievementBox");
+
+        box.innerText = "🏆 " + text;
+
+        box.style.display = "block";
+
+        setTimeout(() => {
+
+          box.style.display = "none";
+
+        }, 3000);
+      }
+
+      /* LEVEL EFFECT */
+
+      function levelUpEffect() {
+
+        let flash = document.createElement("div");
+
+        flash.className = "levelFlash";
+
+        document.body.appendChild(flash);
+
+        setTimeout(() => flash.remove(), 500);
+
+        let levelUpSound = document.getElementById("levelUpSound");
+
+        if (levelUpSound) {
+
+          levelUpSound.currentTime = 0;
+
+          levelUpSound.play();
+        }
+      }
+
+      /* YEAR POPUPS */
+
+      const overlay = document.getElementById("yearOverlay");
+      const popupYear = document.getElementById("popupYear");
+      const popupContent = document.getElementById("popupContent");
+      const closePopup = document.getElementById("closePopup");
+
+      document.querySelectorAll(".year-card").forEach((card) => {
+
+        card.addEventListener("click", () => {
+
+          popupYear.innerText = card.dataset.year;
+
+          popupContent.innerText = card.dataset.content;
+
+          overlay.classList.add("active");
+        });
+      });
+
+      closePopup.addEventListener("click", () => {
+        overlay.classList.remove("active");
+      });
+
+      overlay.addEventListener("click", (e) => {
+
+        if (e.target === overlay) {
+
+          overlay.classList.remove("active");
+        }
+      });
+
+      /* FINAL STAGE */
+
+      document.addEventListener("keydown", (e) => {
+
+        if (e.key.toLowerCase() === "x" && level >= 4) {
+
+          level = 6;
+
+          levelText.innerText = "LEVEL 6";
+
+          showAchievement("FINAL LEVEL UNLOCKED 💖");
+
+          fadeMusicOut();
+
+          const transitionMusic = document.getElementById("finalTransitionMusic");
+
+          transitionMusic.volume = 0.7;
+
+          transitionMusic.play();
+
+          const cloudContainer = document.getElementById("cloudTransition");
+
+          cloudContainer.style.display = "block";
+
+          for (let i = 0; i < 22; i++) {
+
+            let cloud = document.createElement("div");
+
+            cloud.className = "cloud";
+
+            cloud.style.left = Math.random() * 100 + "vw";
+
+            cloud.style.animationDelay = Math.random() * 1 + "s";
+
+            cloudContainer.appendChild(cloud);
+          }
+
+          setTimeout(() => {
+
+            mainContent.style.display = "none";
+
+            final2026.style.display = "block";
+
+            window.scrollTo(0, 0);
+
+          }, 3200);
+        }
+      });
+
+    </script>
+
+  </body>
+</html>
