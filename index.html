@@ -584,17 +584,13 @@
         <div
           class="window year-card"
           data-year="2023"
-          data-content="YOUR 2023 MEMORIES HERE
+          data-content="<img src='2023.png'>"
 
-Long messages.
-Cute moments.
-Conversations.
-Everything special."
         >
           <div class="year-title">2023</div>
 
           <div class="year-content">
-            The growing chapter.
+        
           </div>
         </div>
       </section>
@@ -603,16 +599,12 @@ Everything special."
         <div
           class="window year-card"
           data-year="2024"
-          data-content="YOUR 2024 MEMORIES HERE
+          data-content="<img src='2024.png'>"
 
-Your biggest memories.
-Your favorite screenshots.
-Your letters."
-        >
           <div class="year-title">2024</div>
 
           <div class="year-content">
-            The unforgettable year.
+            
           </div>
         </div>
       </section>
@@ -621,21 +613,13 @@ Your letters."
         <div
           class="window year-card"
           data-year="2025"
-          data-content="YOUR BIGGEST YEAR.
+          data-content="<img src='2025.png'>"
 
-This section is intentionally huge.
-
-Add:
-• Long letters
-• Many images
-• Memories
-• Emotional paragraphs
-• Video memories"
         >
           <div class="year-title">2025</div>
 
           <div class="year-content">
-            The final chapter before forever.
+            
           </div>
         </div>
       </section>
@@ -963,7 +947,7 @@ Add:
 
           popupYear.innerText = card.dataset.year;
 
-          popupContent.innerText = card.dataset.content;
+          popupContent.innerHTML = card.dataset.content;
 
           overlay.classList.add("active");
         });
