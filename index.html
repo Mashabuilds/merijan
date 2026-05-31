@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -52,8 +52,6 @@
         z-index: -1;
       }
 
-      /* CURSOR */
-
       .cursor {
         position: fixed;
         width: 18px;
@@ -65,8 +63,6 @@
         box-shadow: 0 0 15px #ff2e63;
         z-index: 9999;
       }
-
-      /* LOGIN */
 
       #loginScreen {
         position: fixed;
@@ -80,7 +76,7 @@
       }
 
       .login-box {
-        background: rgba(255,255,255,0.95);
+        background: rgba(255, 255, 255, 0.95);
         color: black;
         padding: 50px;
         border: 4px solid black;
@@ -121,8 +117,6 @@
         margin-top: 15px;
       }
 
-      /* LOADING */
-
       #loadingScreen {
         position: fixed;
         width: 100%;
@@ -157,8 +151,6 @@
         background: #ff2e63;
       }
 
-      /* XP */
-
       #xpContainer {
         position: fixed;
         bottom: 20px;
@@ -192,8 +184,6 @@
         z-index: 60;
       }
 
-      /* XP FLOAT */
-
       .xp-float {
         position: fixed;
         color: #00ff88;
@@ -208,13 +198,12 @@
           opacity: 1;
           transform: translateY(0);
         }
+
         100% {
           opacity: 0;
           transform: translateY(-40px);
         }
       }
-
-      /* ACHIEVEMENT */
 
       #achievementBox {
         position: fixed;
@@ -236,13 +225,12 @@
           transform: scale(0.5);
           opacity: 0;
         }
+
         to {
           transform: scale(1);
           opacity: 1;
         }
       }
-
-      /* FLASH */
 
       .levelFlash {
         position: fixed;
@@ -262,52 +250,49 @@
         }
       }
 
-      /* MAIN CONTENT */
-
       #mainContent {
         display: none;
       }
 
       .section {
         min-height: 100vh;
-        padding: 180px 40px;
-        max-width: 1100px;
+        padding: 120px 32px;
+        max-width: 1500px;
         margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .window {
-        background: rgba(255,255,255,0.08);
+        width: 100%;
+        background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(10px);
-        border: 3px solid rgba(255,255,255,0.15);
-        box-shadow: 0 0 40px rgba(255,46,99,0.3);
-        padding: 60px;
+        border: 3px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 40px rgba(255, 46, 99, 0.3);
         border-radius: 25px;
         cursor: pointer;
         transition: 0.4s;
+        overflow: hidden;
       }
 
       .window:hover {
         transform: scale(1.02);
       }
 
-      .year-title {
-        font-family: "Press Start 2P";
-        font-size: 24px;
-        color: #ff2e63;
-        margin-bottom: 40px;
+      .year-photo {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 2 / 1;
+        object-fit: contain;
+        background: rgba(0, 0, 0, 0.35);
       }
-
-      .year-content {
-        font-size: 24px;
-        line-height: 1.8;
-      }
-
-      /* POPUP */
 
       .yearOverlay {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,0.88);
+        background: rgba(0, 0, 0, 0.88);
         backdrop-filter: blur(20px);
         display: flex;
         justify-content: center;
@@ -316,6 +301,7 @@
         pointer-events: none;
         transition: 0.4s;
         z-index: 999;
+        padding: 24px;
       }
 
       .yearOverlay.active {
@@ -324,16 +310,16 @@
       }
 
       .yearPopup {
-        width: 85%;
-        max-width: 1200px;
-        min-height: 80vh;
-        background: rgba(255,255,255,0.08);
+        width: 95%;
+        max-width: 1600px;
+        max-height: 90vh;
+        background: rgba(255, 255, 255, 0.08);
         border: 3px solid #ff2e63;
         border-radius: 30px;
-        padding: 60px;
+        padding: 28px;
         position: relative;
-        overflow-y: auto;
-        box-shadow: 0 0 50px rgba(255,46,99,0.5);
+        overflow: auto;
+        box-shadow: 0 0 50px rgba(255, 46, 99, 0.5);
         animation: popupIn 0.4s ease;
       }
 
@@ -342,6 +328,7 @@
           transform: scale(0.8);
           opacity: 0;
         }
+
         to {
           transform: scale(1);
           opacity: 1;
@@ -349,28 +336,24 @@
       }
 
       .closePopup {
-        position: absolute;
-        top: 25px;
-        right: 30px;
-        font-size: 35px;
+        position: fixed;
+        top: 35px;
+        right: 48px;
+        font-size: 42px;
         cursor: pointer;
         color: #ff2e63;
+        z-index: 1000;
       }
 
-      .popupYear {
-        font-family: "Press Start 2P";
-        color: #ff2e63;
-        font-size: 28px;
-        margin-bottom: 40px;
+      .popupImage {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 82vh;
+        object-fit: contain;
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.35);
       }
-
-      .popupContent {
-        font-size: 22px;
-        line-height: 2;
-        white-space: pre-line;
-      }
-
-      /* PRESS X */
 
       #unlock2026 {
         text-align: center;
@@ -393,8 +376,6 @@
         }
       }
 
-      /* HEARTS */
-
       .heart {
         position: fixed;
         bottom: -20px;
@@ -413,8 +394,6 @@
         }
       }
 
-      /* SPARKS */
-
       .spark {
         position: fixed;
         color: #ff6b81;
@@ -432,8 +411,6 @@
         }
       }
 
-      /* FINAL */
-
       #final2026 {
         display: none;
         min-height: 100vh;
@@ -444,10 +421,10 @@
       .video-container {
         width: 90%;
         max-width: 1000px;
-        aspect-ratio: 16/9;
+        aspect-ratio: 16 / 9;
         margin: 40px auto;
         border: 4px solid #ff2e63;
-        box-shadow: 0 0 35px rgba(255,46,99,0.5);
+        box-shadow: 0 0 35px rgba(255, 46, 99, 0.5);
       }
 
       video {
@@ -455,8 +432,6 @@
         height: 100%;
         object-fit: cover;
       }
-
-      /* CLOUD TRANSITION */
 
       #cloudTransition {
         position: fixed;
@@ -471,7 +446,7 @@
         position: absolute;
         width: 600px;
         height: 250px;
-        background: rgba(255,255,255,0.95);
+        background: rgba(255, 255, 255, 0.95);
         border-radius: 50%;
         filter: blur(35px);
         animation: cloudRise 3.5s ease forwards;
@@ -482,36 +457,53 @@
           transform: translateY(120vh);
           opacity: 0;
         }
+
         15% {
           opacity: 1;
         }
+
         100% {
           transform: translateY(-180vh);
           opacity: 1;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .section {
+          padding: 90px 16px;
+        }
+
+        .window {
+          border-radius: 16px;
+        }
+
+        .yearPopup {
+          width: 100%;
+          padding: 14px;
+          border-radius: 18px;
+        }
+
+        .closePopup {
+          top: 20px;
+          right: 28px;
+          font-size: 34px;
         }
       }
     </style>
   </head>
 
   <body>
-
     <div id="cloudTransition"></div>
 
     <div class="cursor"></div>
 
-    <!-- POPUP -->
-
     <div class="yearOverlay" id="yearOverlay">
+      <div class="closePopup" id="closePopup">×</div>
+
       <div class="yearPopup">
-        <div class="closePopup" id="closePopup">✕</div>
-
-        <div class="popupYear" id="popupYear"></div>
-
-        <div class="popupContent" id="popupContent"></div>
+        <img class="popupImage" id="popupImage" alt="" />
       </div>
     </div>
-
-    <!-- LOGIN -->
 
     <div id="loginScreen">
       <div class="login-box">
@@ -527,17 +519,13 @@
       </div>
     </div>
 
-    <!-- LOADING -->
-
     <div id="loadingScreen">
-      <h1>I HAVE BEEN WAITING<br>FOR YOU MERIJAN.</h1>
+      <h1>I HAVE BEEN WAITING<br />FOR YOU MERIJAN.</h1>
 
       <div class="loader-bar">
         <div class="loader-fill" id="loaderFill"></div>
       </div>
     </div>
-
-    <!-- AUDIO -->
 
     <audio id="bgMusic" loop>
       <source src="Dekha Hi Nahi.mp3" type="audio/mp3" />
@@ -550,10 +538,8 @@
     <audio id="levelUpSound" src="level up sound.mp3"></audio>
 
     <audio id="finalTransitionMusic">
-      <source src="sounds/final stage transition music.mp3" type="audio/mp3">
+      <source src="sounds/final stage transition music.mp3" type="audio/mp3" />
     </audio>
-
-    <!-- HUD -->
 
     <div id="levelText">LEVEL 1</div>
 
@@ -561,22 +547,14 @@
       <div id="xpBar"></div>
     </div>
 
-    <!-- MAIN -->
-
     <div id="mainContent">
-
       <section class="section year" data-xp="100">
         <div
           class="window year-card"
           data-year="2022"
-         data-image="<img src='2022.png'>"
-
-
-          <div class="year-title">2022</div>
-
-          <div class="year-content">
-           
-          </div>
+          data-image="2022.png"
+        >
+          <img class="year-photo" src="pictures/2022.png" alt="2022 memories" />
         </div>
       </section>
 
@@ -584,14 +562,9 @@
         <div
           class="window year-card"
           data-year="2023"
-          data-image="<img src='2023.png'>"
-
+          data-image="2023.png"
         >
-          <div class="year-title">2023</div>
-
-          <div class="year-content">
-        
-          </div>
+          <img class="year-photo" src="pictures/2023.png" alt="2023 memories" />
         </div>
       </section>
 
@@ -599,13 +572,9 @@
         <div
           class="window year-card"
           data-year="2024"
-          data-image="<img src='2024.png'>"
-
-          <div class="year-title">2024</div>
-
-          <div class="year-content">
-            
-          </div>
+          data-image="2024.png"
+        >
+          <img class="year-photo" src="pictures/2024.png" alt="2024 memories" />
         </div>
       </section>
 
@@ -613,47 +582,38 @@
         <div
           class="window year-card"
           data-year="2025"
-          data-image="<img src='2025.png'>"
-
+          data-image="2025.png"
         >
-          <div class="year-title">2025</div>
-
-          <div class="year-content">
-            
-          </div>
+          <img class="year-photo" src="pictures/2025.png" alt="2025 memories" />
         </div>
       </section>
 
-      <div id="unlock2026">
-        PRESS X TO ENTER THE FINAL STAGE — 2026
-      </div>
-
+      <div id="unlock2026">PRESS X TO ENTER THE FINAL STAGE — 2026</div>
     </div>
 
-    <!-- FINAL -->
-
     <section id="final2026">
-
-      <h1 style="font-family:'Press Start 2P'; color:#ff2e63; margin-bottom:30px;">
+      <h1
+        style="
+          font-family: &quot;Press Start 2P&quot;;
+          color: #ff2e63;
+          margin-bottom: 30px;
+        "
+      >
         LEVEL 6 — 2026
       </h1>
 
-      <h2 style="margin-bottom:50px;">
-        This is where we begin again.
-      </h2>
+      <h2 style="margin-bottom: 50px">This is where we begin again.</h2>
 
       <div class="video-container">
         <video controls>
           <source src="videos/final.mp4" type="video/mp4" />
         </video>
       </div>
-
     </section>
 
     <div id="achievementBox">Achievement Unlocked!</div>
 
     <script>
-
       const loginBtn = document.getElementById("loginBtn");
       const password = document.getElementById("password");
       const username = document.getElementById("username");
@@ -673,17 +633,13 @@
       const typingSound = document.getElementById("typingSound");
       const clickSound = document.getElementById("clickSound");
 
-      /* CURSOR */
-
       document.addEventListener("mousemove", (e) => {
         document.querySelector(".cursor").style.left = e.clientX + "px";
         document.querySelector(".cursor").style.top = e.clientY + "px";
       });
 
-      /* SOUNDS */
-
-      document.querySelectorAll("input").forEach((i) => {
-        i.addEventListener("keydown", () => {
+      document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("keydown", () => {
           typingSound.currentTime = 0;
           typingSound.play();
         });
@@ -694,20 +650,12 @@
         clickSound.play();
       });
 
-      /* LOGIN */
-
       function attemptLogin() {
-
         if (password.value === "elonom123") {
-
           loginScreen.style.display = "none";
-
           startLoading();
-
         } else {
-
           loginError.innerText = "Wrong password.";
-
         }
       }
 
@@ -721,136 +669,90 @@
         if (e.key === "Enter") attemptLogin();
       });
 
-      /* LOADING */
-
       function startLoading() {
-
         loadingScreen.style.display = "flex";
 
         bgMusic.volume = 0;
-
         bgMusic.play();
 
         let w = 0;
 
         let load = setInterval(() => {
-
           w += 5;
-
           loaderFill.style.width = w + "%";
 
           if (w >= 100) {
-
             clearInterval(load);
-
             loadingScreen.style.display = "none";
-
             mainContent.style.display = "block";
-
             spawnHearts();
-
             spawnSparks();
-
             fadeMusicIn();
-
           }
-
         }, 120);
       }
 
-      /* MUSIC */
-
       function fadeMusicIn() {
-
         let f = setInterval(() => {
-
           if (bgMusic.volume < 0.5) {
             bgMusic.volume += 0.02;
           } else {
             clearInterval(f);
           }
-
         }, 200);
       }
 
       function fadeMusicOut() {
-
         let f = setInterval(() => {
-
           if (bgMusic.volume > 0.02) {
-
             bgMusic.volume -= 0.02;
-
           } else {
-
             bgMusic.pause();
-
             clearInterval(f);
           }
-
         }, 200);
       }
 
-      /* HEARTS */
-
       function spawnHearts() {
-
         setInterval(() => {
-
           let h = document.createElement("div");
 
           h.className = "heart";
-
           h.innerText = "❤";
-
           h.style.left = Math.random() * 100 + "vw";
 
           document.body.appendChild(h);
 
           setTimeout(() => h.remove(), 8000);
-
         }, 600);
       }
 
-      /* SPARKS */
-
       function spawnSparks() {
-
         setInterval(() => {
-
           let s = document.createElement("div");
 
           s.className = "spark";
-
           s.innerText = "✦";
-
           s.style.top = Math.random() * 100 + "vh";
 
           document.body.appendChild(s);
 
           setTimeout(() => s.remove(), 10000);
-
         }, 1200);
       }
 
-      /* XP SYSTEM */
-
-      let xp = 0,
-          level = 1,
-          maxXP = 100;
+      let xp = 0;
+      let level = 1;
+      let maxXP = 100;
 
       function gainXP(amount) {
-
         xp += amount;
 
         let float = document.createElement("div");
 
         float.className = "xp-float";
-
         float.innerText = "+" + amount + " XP";
-
         float.style.left = "50%";
-
         float.style.top = "60%";
 
         document.body.appendChild(float);
@@ -858,64 +760,49 @@
         setTimeout(() => float.remove(), 1200);
 
         if (xp >= maxXP) {
-
           xp -= maxXP;
-
           level++;
 
           levelText.innerText = "LEVEL " + level;
 
           showAchievement("Level " + level + " Unlocked 💖");
-
           levelUpEffect();
         }
 
         xpBar.style.width = (xp / maxXP) * 100 + "%";
       }
 
-      /* OBSERVER */
-
       const observer = new IntersectionObserver(
-
         (entries) => {
-
-          entries.forEach((e) => {
-
-            if (e.isIntersecting && !e.target.classList.contains("counted")) {
-
-              e.target.classList.add("counted");
-
-              gainXP(parseInt(e.target.dataset.xp));
+          entries.forEach((entry) => {
+            if (
+              entry.isIntersecting &&
+              !entry.target.classList.contains("counted")
+            ) {
+              entry.target.classList.add("counted");
+              gainXP(parseInt(entry.target.dataset.xp));
             }
           });
         },
-
-        { threshold: 0.6 }
+        { threshold: 0.6 },
       );
 
-      document.querySelectorAll(".year").forEach((y) => observer.observe(y));
-
-      /* ACHIEVEMENT */
+      document
+        .querySelectorAll(".year")
+        .forEach((year) => observer.observe(year));
 
       function showAchievement(text) {
-
         let box = document.getElementById("achievementBox");
 
         box.innerText = "🏆 " + text;
-
         box.style.display = "block";
 
         setTimeout(() => {
-
           box.style.display = "none";
-
         }, 3000);
       }
 
-      /* LEVEL EFFECT */
-
       function levelUpEffect() {
-
         let flash = document.createElement("div");
 
         flash.className = "levelFlash";
@@ -927,27 +814,19 @@
         let levelUpSound = document.getElementById("levelUpSound");
 
         if (levelUpSound) {
-
           levelUpSound.currentTime = 0;
-
           levelUpSound.play();
         }
       }
 
-      /* YEAR POPUPS */
-
       const overlay = document.getElementById("yearOverlay");
-      const popupYear = document.getElementById("popupYear");
-      const popupContent = document.getElementById("popupContent");
+      const popupImage = document.getElementById("popupImage");
       const closePopup = document.getElementById("closePopup");
 
       document.querySelectorAll(".year-card").forEach((card) => {
-
         card.addEventListener("click", () => {
-
-          popupYear.innerText = card.dataset.year;
-
-          popupContent.innerHTML = card.dataset.content;
+          popupImage.src = card.dataset.image;
+          popupImage.alt = card.dataset.year + " memories";
 
           overlay.classList.add("active");
         });
@@ -958,19 +837,13 @@
       });
 
       overlay.addEventListener("click", (e) => {
-
         if (e.target === overlay) {
-
           overlay.classList.remove("active");
         }
       });
 
-      /* FINAL STAGE */
-
       document.addEventListener("keydown", (e) => {
-
         if (e.key.toLowerCase() === "x" && level >= 4) {
-
           level = 6;
 
           levelText.innerText = "LEVEL 6";
@@ -979,10 +852,11 @@
 
           fadeMusicOut();
 
-          const transitionMusic = document.getElementById("finalTransitionMusic");
+          const transitionMusic = document.getElementById(
+            "finalTransitionMusic",
+          );
 
           transitionMusic.volume = 0.7;
-
           transitionMusic.play();
 
           const cloudContainer = document.getElementById("cloudTransition");
@@ -990,31 +864,22 @@
           cloudContainer.style.display = "block";
 
           for (let i = 0; i < 22; i++) {
-
             let cloud = document.createElement("div");
 
             cloud.className = "cloud";
-
             cloud.style.left = Math.random() * 100 + "vw";
-
             cloud.style.animationDelay = Math.random() * 1 + "s";
 
             cloudContainer.appendChild(cloud);
           }
 
           setTimeout(() => {
-
             mainContent.style.display = "none";
-
             final2026.style.display = "block";
-
             window.scrollTo(0, 0);
-
           }, 3200);
         }
       });
-
     </script>
-
   </body>
 </html>
